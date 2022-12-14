@@ -1,0 +1,4 @@
+name: Analyse
+version: 1.0-SNAPSHOT
+main: net.analyse.base.platform.bungee.BungeeAnalysePlatform
+author: Analyse

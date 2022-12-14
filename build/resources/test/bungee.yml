@@ -1,0 +1,4 @@
+name: Analyse
+version: ${pluginVersion}
+main: net.analyse.base.platform.bungee.BungeeAnalysePlatform
+author: Analyse

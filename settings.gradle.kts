@@ -1,2 +1,2 @@
-rootProject.name = "analyse-tracking"
+rootProject.name = "analyse"
 

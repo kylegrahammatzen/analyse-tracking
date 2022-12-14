@@ -1,41 +1,39 @@
 plugins {
     id("java")
+    id("com.github.johnrengelman.shadow") version "7.0.0"
 }
 
 group = "net.analyse"
 version = "1.0-SNAPSHOT"
 
 repositories {
-    mavenCentral()
-    maven("https://oss.sonatype.org/content/groups/public/")
+    mavenLocal()
+    maven("https://hub.spigotmc.org/nexus/content/repositories/snapshots/")
+    maven("https://repo.extendedclip.com/content/repositories/placeholderapi/")
     maven("https://jitpack.io/")
-    maven("https://libraries.minecraft.net/")
-    maven("https://repo.codemc.org/repository/maven-public/")
+    mavenCentral()
 }
 
 dependencies {
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.1")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.8.1")
+    compileOnly("com.google.code.gson:gson:2.10")
+    compileOnly("org.jetbrains:annotations:23.0.0")
+    compileOnly("org.spigotmc:spigot-api:1.19.3-R0.1-SNAPSHOT")
 }
 
-jar {
-    manifest {
-        attributes(
-                'Main-Class': 'net.analyse.base.Base'
-        )
+tasks {
+    shadowJar {
+        archiveFileName.set("${project.name}-analyse-${project.version}.jar")
+    }
+    compileJava {
+        options.encoding = "UTF-8"
+    }
+
+    processResources {
+        duplicatesStrategy = DuplicatesStrategy.INCLUDE
+
+        filesNotMatching("**/*.zip") {
+            expand("pluginVersion" to version)
+        }
     }
 }
 
-task fatJar(type: Jar) {
-    manifest.from jar.manifest
-    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-    from {
-        // change here: runtimeClasspath instead of runtime
-        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
-    } {
-        exclude "META-INF/.SF"
-        exclude "META-INF/.DSA"
-        exclude "META-INF/*.RSA"
-    }
-    with jar
-}

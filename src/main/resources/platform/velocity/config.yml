@@ -3,7 +3,7 @@
 # Version - ${pluginVersion}
 #
 # Use https://docs.analyse.net for plugin documentation.
-
+#
 # Configure the following to store player data locally before sending it to Analyse.
 # Make sure that the following is the same as the database configuration on your other servers.
 database:

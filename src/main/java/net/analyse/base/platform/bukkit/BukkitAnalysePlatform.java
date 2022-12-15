@@ -83,8 +83,8 @@ public class BukkitAnalysePlatform extends JavaPlugin implements AnalyseBase {
         ConfigurationNode databaseConfig = configFile.getNode("database");
 
         // Load the databases
-        database = new MySQLDatabase(super.getLogger(), "", 0, "", "", "", true);
-        backupDatabase = new SQLiteDatabase(super.getLogger(), getDirectory().getAbsolutePath());
+        //database = new MySQLDatabase(super.getLogger(), "", 0, "", "", "", true);
+        //backupDatabase = new SQLiteDatabase(super.getLogger(), getDirectory().getAbsolutePath());
 
     }
 

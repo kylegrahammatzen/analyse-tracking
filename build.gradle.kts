@@ -19,8 +19,13 @@ repositories {
 }
 
 dependencies {
+    // MySQL database dependencies & connection pool.
+    implementation("com.zaxxer:HikariCP:5.0.1")
+
+    // Configuration file dependencies.
     implementation("ninja.leaping.configurate:configurate-yaml:3.7.1")
 
+    // HTTP request dependencies.
     compileOnly("com.google.code.gson:gson:2.10")
     compileOnly("org.jetbrains:annotations:23.0.0")
 

@@ -1,6 +1,9 @@
 package net.analyse.base.platform.bukkit;
 
 import net.analyse.base.AnalyseBase;
+import net.analyse.base.database.AnalyseDatabase;
+import net.analyse.base.database.types.MySQLDatabase;
+import net.analyse.base.database.types.SQLiteDatabase;
 import net.analyse.base.utils.ResourceUtils;
 import ninja.leaping.configurate.ConfigurationNode;
 import ninja.leaping.configurate.ConfigurationOptions;
@@ -14,6 +17,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 
 public class BukkitAnalysePlatform extends JavaPlugin implements AnalyseBase {
+
+    private AnalyseDatabase database;
+    private AnalyseDatabase backupDatabase;
 
     /**
      * Runs when the plugin is enabled
@@ -73,6 +79,12 @@ public class BukkitAnalysePlatform extends JavaPlugin implements AnalyseBase {
                 .setFile(getBundledFile("config.yml"))
                 .build()
                 .load();
+
+        ConfigurationNode databaseConfig = configFile.getNode("database");
+
+        // Load the databases
+        database = new MySQLDatabase(super.getLogger(), "", 0, "", "", "", true);
+        backupDatabase = new SQLiteDatabase(super.getLogger(), getDirectory().getAbsolutePath());
 
     }
 

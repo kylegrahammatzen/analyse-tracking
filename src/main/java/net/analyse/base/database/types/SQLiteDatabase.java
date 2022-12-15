@@ -17,6 +17,11 @@ public class SQLiteDatabase implements AnalyseDatabase {
     private final AtomicInteger openConnections;
     private final Object lock;
 
+    /**
+     * Creates a new SQLiteDatabase instance.
+     * @param logger The logger to use.
+     * @param directory The directory to use.
+     */
     public SQLiteDatabase(Logger logger, String directory) {
         this.logger = logger;
         this.connectionString = "jdbc:sqlite:" + directory + "/backup.db";
@@ -41,6 +46,10 @@ public class SQLiteDatabase implements AnalyseDatabase {
         }
     }
 
+    /**
+     * Executes a callback with a connection and automatically closes when finished
+     * @param connectionCallback The callback to execute
+     */
     @Override
     public void connect(ConnectionCallback connectionCallback) {
         try {
@@ -83,6 +92,11 @@ public class SQLiteDatabase implements AnalyseDatabase {
         }
     }
 
+    /**
+     * Executes a callback with a connection and automatically closes when finished
+     * @param connectionCallback The callback to execute
+     * @param transaction Whether to use a transaction or not
+     */
     @Override
     public void connect(ConnectionCallback connectionCallback, boolean transaction) {
         if (transaction) {
@@ -117,6 +131,9 @@ public class SQLiteDatabase implements AnalyseDatabase {
         }
     }
 
+    /**
+     * Closes connection to the database
+     */
     @Override
     public void closeConnection() {
         try {
@@ -128,16 +145,27 @@ public class SQLiteDatabase implements AnalyseDatabase {
         }
     }
 
+    /**
+     * Whether all connections are completed.
+     * @return true if all connections are completed, false otherwise.
+     */
     @Override
     public boolean completed() {
         return this.openConnections.get() == 0;
     }
 
+    /**
+     * The lock to notify when all connections have been finalized
+     * @return true if all connections are finalized, false otherwise.
+     */
     @Override
     public Object getLock() {
         return this.lock;
     }
 
+    /**
+     * Cleans database data if needed
+     */
     @Override
     public void clean() {
         this.connect(connection -> {

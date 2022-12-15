@@ -2,7 +2,6 @@ package net.analyse.base.database;
 
 public interface AnalyseDatabase {
 
-
     /**
      * Executes a callback with a connection and automatically closes when finished
      * @param connectionCallback The callback to execute

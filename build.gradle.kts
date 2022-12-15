@@ -20,6 +20,7 @@ repositories {
 
 dependencies {
     // MySQL database dependencies & connection pool.
+    implementation("mysql:mysql-connector-java:8.0.30")
     implementation("com.zaxxer:HikariCP:4.0.3")
 
     // Configuration file dependencies.

@@ -1,6 +1,6 @@
 name: Analyse
 main: net.analyse.base.platform.bukkit.BukkitAnalysePlatform
-version: 1.0-SNAPSHOT
+version: 1.0.0
 author: "Analyse"
 website: "https://analyse.net"
 description: "Understand your Minecraft audience and monetise your server better."

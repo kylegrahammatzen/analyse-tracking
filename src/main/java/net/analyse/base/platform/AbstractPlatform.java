@@ -3,6 +3,7 @@ package net.analyse.base.platform;
 import net.analyse.base.AnalyseBase;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.logging.Logger;
 
 public abstract class AbstractPlatform implements AnalyseBase {
@@ -10,9 +11,12 @@ public abstract class AbstractPlatform implements AnalyseBase {
     protected final Logger logger;
     protected final File directory;
 
-    protected AbstractPlatform(Logger logger, File directory, String configFileName) {
+    protected final String platformName;
+
+    protected AbstractPlatform(Logger logger, File directory, String platformName) {
         this.logger = logger;
         this.directory = directory;
+        this.platformName = platformName;
     }
 
     @Override
@@ -26,7 +30,22 @@ public abstract class AbstractPlatform implements AnalyseBase {
     }
 
     @Override
+    public String getPlatformName() {
+        return platformName;
+    }
+
+    @Override
     public String getVersion() {
         return VERSION;
+    }
+
+    @Override
+    public void loadConfig() {
+
+    }
+
+    @Override
+    public void reloadConfig() {
+
     }
 }

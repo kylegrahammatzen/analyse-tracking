@@ -4,13 +4,16 @@ import com.google.inject.Inject;
 import com.velocitypowered.api.event.Subscribe;
 import com.velocitypowered.api.event.proxy.ProxyInitializeEvent;
 import com.velocitypowered.api.event.proxy.ProxyShutdownEvent;
+import com.velocitypowered.api.plugin.PluginContainer;
+import com.velocitypowered.api.plugin.PluginDescription;
 import com.velocitypowered.api.plugin.annotation.DataDirectory;
 import com.velocitypowered.api.proxy.ProxyServer;
+import net.analyse.base.AnalyseBase;
 import net.analyse.base.platform.AbstractPlatform;
 
+import java.io.File;
 import java.nio.file.Path;
 import java.util.logging.Logger;
-
 public class VelocityAnalysePlatform extends AbstractPlatform {
 
     private final ProxyServer server;
@@ -23,20 +26,15 @@ public class VelocityAnalysePlatform extends AbstractPlatform {
 
     @Subscribe
     public void onInit(ProxyInitializeEvent event) {
-        getLogger().info("AnalyseBase is enabled! (Velocity)");
+        logger.info(String.format("Enabling Analyse v%s (Velocity)", getVersion()));
     }
 
-    @Subscribe
-    public void onShutdown(ProxyShutdownEvent event) {
-        getLogger().info("AnalyseBase is disabled! (Velocity)");
+    @Override
+    public String getVersion() {
+        return getDescription().getVersion().orElse("Unknown");
     }
 
-    public <T> T registerEvents(T l) {
-        server.getEventManager().register(this, l);
-        return l;
-    }
-
-    public ProxyServer getServer() {
-        return server;
+    PluginDescription getDescription() {
+        return server.getPluginManager().getPlugin("analyse").map(PluginContainer::getDescription).orElse(null);
     }
 }

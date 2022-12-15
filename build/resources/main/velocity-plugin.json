@@ -1,0 +1,11 @@
+{
+  "id": "analyse",
+  "name": "Analyse",
+  "version": "1.0-SNAPSHOT",
+  "description": "The proxy receiver for Analyse.",
+  "url": "https://analyse.net",
+  "authors": [
+    "Analyse"
+  ],
+  "main": "net.analyse.base.platform.velocity.VelocityAnalysePlatform"
+}

@@ -11,12 +11,7 @@ public class BukkitAnalysePlatform extends JavaPlugin implements AnalyseBase {
 
     @Override
     public void onEnable() {
-        getLogger().info("AnalyseBase is enabled! (Bukkit)");
-    }
-
-    @Override
-    public void onDisable() {
-        getLogger().info("AnalyseBase is disabled! (Bukkit)");
+        getLogger().info(String.format("Enabling Analyse v%s (Bukkit)", getVersion()));
     }
 
     @Override

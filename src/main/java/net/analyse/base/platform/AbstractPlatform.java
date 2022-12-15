@@ -13,8 +13,6 @@ public abstract class AbstractPlatform implements AnalyseBase {
     protected AbstractPlatform(Logger logger, File directory, String configFileName) {
         this.logger = logger;
         this.directory = directory;
-
-        logger.info("AnalyseBase is being loaded! (Abstract)");
     }
 
     @Override

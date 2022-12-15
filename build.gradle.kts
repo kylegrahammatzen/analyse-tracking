@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "net.analyse"
-version = "1.0-SNAPSHOT"
+version = "1.0.0"
 
 repositories {
     mavenLocal()
@@ -13,9 +13,8 @@ repositories {
     maven("https://repo.maven.apache.org/maven2/")
 
     maven("https://hub.spigotmc.org/nexus/content/repositories/snapshots/")
-    maven("https://nexus.velocitypowered.com/repository/maven-public/")
+    maven("https://repo.papermc.io/repository/maven-public/")
 
-    maven("https://repo.extendedclip.com/content/repositories/placeholderapi/")
     mavenCentral()
 }
 
@@ -32,8 +31,8 @@ dependencies {
     compileOnly("net.md-5:bungeecord-api:1.18-R0.1-SNAPSHOT")
 
     // Velocity Platform
-    compileOnly("com.velocitypowered:velocity-api:3.1.0")
-    annotationProcessor("com.velocitypowered:velocity-api:3.1.0")
+    compileOnly("com.velocitypowered:velocity-api:3.1.1")
+    annotationProcessor("com.velocitypowered:velocity-api:3.1.1")
 }
 
 tasks {

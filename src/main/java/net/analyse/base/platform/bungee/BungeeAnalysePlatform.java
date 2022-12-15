@@ -11,12 +11,7 @@ public class BungeeAnalysePlatform extends Plugin implements AnalyseBase {
 
     @Override
     public void onEnable() {
-        getLogger().info("AnalyseBase is enabled! (Bungee)");
-    }
-
-    @Override
-    public void onDisable() {
-        getLogger().info("AnalyseBase is disabled! (Bungee)");
+        getLogger().info(String.format("Enabling Analyse v%s (Bungee)", getVersion()));
     }
 
     @Override

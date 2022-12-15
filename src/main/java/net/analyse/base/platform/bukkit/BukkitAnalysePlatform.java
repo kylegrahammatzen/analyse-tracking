@@ -2,7 +2,8 @@ package net.analyse.base.platform.bukkit;
 
 import net.analyse.base.AnalyseBase;
 import net.analyse.base.database.AnalyseDatabase;
-import net.analyse.base.utils.ResourceUtils;
+import net.analyse.base.platform.bukkit.configuration.Configuration;
+import net.analyse.base.sdk.AnalyseSDK;
 import ninja.leaping.configurate.ConfigurationNode;
 import ninja.leaping.configurate.ConfigurationOptions;
 import ninja.leaping.configurate.objectmapping.serialize.TypeSerializerCollection;
@@ -12,12 +13,15 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
+
+import static net.analyse.base.utils.ResourceUtils.getBundledFile;
 
 public class BukkitAnalysePlatform extends JavaPlugin implements AnalyseBase {
 
+    private AnalyseSDK sdk;
     private AnalyseDatabase database;
     private AnalyseDatabase backupDatabase;
+    private Configuration platformConfiguration;
 
     /**
      * Runs when the plugin is enabled
@@ -26,11 +30,18 @@ public class BukkitAnalysePlatform extends JavaPlugin implements AnalyseBase {
     public void onEnable() {
         getLogger().info(String.format("Enabling Analyse v%s (Bukkit)", getVersion()));
 
+        this.platformConfiguration = new Configuration(this);
+
         try {
             loadConfig();
         } catch (Exception e) {
             throw new RuntimeException("Failed to load config", e);
         }
+    }
+
+    @Override
+    public AnalyseSDK getSDK() {
+        return sdk;
     }
 
     /**
@@ -66,7 +77,7 @@ public class BukkitAnalysePlatform extends JavaPlugin implements AnalyseBase {
      */
     @Override
     public void loadConfig() throws IOException {
-        // Load the config
+        // Retrieve the config file
         TypeSerializerCollection serializerCollection = TypeSerializerCollection.create();
 
         ConfigurationOptions options = ConfigurationOptions.defaults()
@@ -74,9 +85,11 @@ public class BukkitAnalysePlatform extends JavaPlugin implements AnalyseBase {
 
         ConfigurationNode configFile = YAMLConfigurationLoader.builder()
                 .setDefaultOptions(options)
-                .setFile(getBundledFile("config.yml"))
+                .setFile(getBundledFile(getLogger(), getDirectory(), getPlatformName(), "config.yml"))
                 .build()
                 .load();
+
+        // Load the config
     }
 
     /**
@@ -92,6 +105,13 @@ public class BukkitAnalysePlatform extends JavaPlugin implements AnalyseBase {
     }
 
     /**
+     * Get the config
+     */
+    public Configuration getConfiguration() {
+        return platformConfiguration;
+    }
+
+    /**
      * Registers the specified listener with the plugin manager.
      *
      * @param l the listener to register
@@ -102,29 +122,15 @@ public class BukkitAnalysePlatform extends JavaPlugin implements AnalyseBase {
         return l;
     }
 
+    public void setSDK(AnalyseSDK analyseSDK) {
+        this.sdk = analyseSDK;
+    }
+
     /**
-     * Gets a file from the resources folder
-     * @param fileName The name of the file
-     * @return The file
+     * Set up the SDK
      */
-    private File getBundledFile(String fileName) {
-        File file = new File(getDirectory(), fileName);
-
-        if (!file.exists()) {
-            if (!getDirectory().exists()) {
-                if (!getDirectory().mkdirs()) {
-                    throw new RuntimeException("Failed to create plugin folder");
-                }
-            }
-
-            try {
-                // Copies the file from the resources' folder to the plugin folder
-                Files.copy(ResourceUtils.getFile(getPlatformName(), fileName).toPath(), file.toPath());
-            } catch (IOException e) {
-                getLogger().severe(String.format("Failed to copy %s to plugin folder", fileName));
-            }
-        }
-
-        return file;
+    public AnalyseSDK setup(String token) {
+        setSDK(new AnalyseSDK(token, getConfiguration().getEncryptionKey()));
+        return getSDK();
     }
 }

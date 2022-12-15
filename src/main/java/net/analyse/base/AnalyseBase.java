@@ -1,11 +1,18 @@
 package net.analyse.base;
 
+import net.analyse.base.sdk.AnalyseSDK;
+
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.logging.Logger;
 
 public interface AnalyseBase {
+
+    /**
+     * The system sdk
+     */
+    AnalyseSDK getSDK();
 
     /**
      * The version of the plugin.

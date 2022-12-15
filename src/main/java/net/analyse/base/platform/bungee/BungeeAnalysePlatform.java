@@ -1,7 +1,8 @@
 package net.analyse.base.platform.bungee;
 
 import net.analyse.base.AnalyseBase;
-import net.analyse.base.utils.ResourceUtils;
+import net.analyse.base.database.AnalyseDatabase;
+import net.analyse.base.sdk.AnalyseSDK;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.plugin.Listener;
 import net.md_5.bungee.api.plugin.Plugin;
@@ -12,9 +13,14 @@ import ninja.leaping.configurate.yaml.YAMLConfigurationLoader;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
+
+import static net.analyse.base.utils.ResourceUtils.getBundledFile;
 
 public class BungeeAnalysePlatform extends Plugin implements AnalyseBase {
+
+    private AnalyseSDK sdk;
+    private AnalyseDatabase database;
+    private AnalyseDatabase backupDatabase;
 
     /**
      * Runs when the plugin is enabled
@@ -28,6 +34,11 @@ public class BungeeAnalysePlatform extends Plugin implements AnalyseBase {
         } catch (Exception e) {
             throw new RuntimeException("Failed to load config", e);
         }
+    }
+
+    @Override
+    public AnalyseSDK getSDK() {
+        return sdk;
     }
 
     /**
@@ -63,7 +74,7 @@ public class BungeeAnalysePlatform extends Plugin implements AnalyseBase {
      */
     @Override
     public void loadConfig() throws IOException {
-        // Load the config
+        // Retrieve the config file
         TypeSerializerCollection serializerCollection = TypeSerializerCollection.create();
 
         ConfigurationOptions options = ConfigurationOptions.defaults()
@@ -71,10 +82,11 @@ public class BungeeAnalysePlatform extends Plugin implements AnalyseBase {
 
         ConfigurationNode configFile = YAMLConfigurationLoader.builder()
                 .setDefaultOptions(options)
-                .setFile(getBundledFile("config.yml"))
+                .setFile(getBundledFile(getLogger(), getDirectory(), getPlatformName(), "config.yml"))
                 .build()
                 .load();
 
+        // Load the config
     }
 
     /**
@@ -98,31 +110,5 @@ public class BungeeAnalysePlatform extends Plugin implements AnalyseBase {
     public <T extends Listener> T registerEvents(T l) {
         ProxyServer.getInstance().getPluginManager().registerListener(this, l);
         return l;
-    }
-
-    /**
-     * Gets a file from the resources folder
-     * @param fileName The name of the file
-     * @return The file
-     */
-    private File getBundledFile(String fileName) {
-        File file = new File(getDirectory(), fileName);
-
-        if (!file.exists()) {
-            if (!getDirectory().exists()) {
-                if (!getDirectory().mkdirs()) {
-                    throw new RuntimeException("Failed to create plugin folder");
-                }
-            }
-
-            try {
-                // Copies the file from the resources' folder to the plugin folder
-                Files.copy(ResourceUtils.getFile(getPlatformName(), fileName).toPath(), file.toPath());
-            } catch (IOException e) {
-                getLogger().severe(String.format("Failed to copy %s to plugin folder", fileName));
-            }
-        }
-
-        return file;
     }
 }

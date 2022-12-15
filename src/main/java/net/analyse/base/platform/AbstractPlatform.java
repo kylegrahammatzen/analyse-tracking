@@ -10,7 +10,6 @@ public abstract class AbstractPlatform implements AnalyseBase {
 
     protected final Logger logger;
     protected final File directory;
-
     protected final String platformName;
 
     protected AbstractPlatform(Logger logger, File directory, String platformName) {
@@ -40,7 +39,7 @@ public abstract class AbstractPlatform implements AnalyseBase {
     }
 
     @Override
-    public void loadConfig() {
+    public void loadConfig() throws IOException {
 
     }
 

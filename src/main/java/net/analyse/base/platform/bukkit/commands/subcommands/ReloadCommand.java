@@ -1,8 +1,8 @@
 package net.analyse.base.platform.bukkit.commands.subcommands;
 
 import net.analyse.base.platform.bukkit.BukkitAnalysePlatform;
-import net.analyse.base.platform.bukkit.commands.SubCommand;
 import net.analyse.base.platform.bukkit.util.ColorUtil;
+import net.analyse.base.platform.bukkit.commands.SubCommand;
 import org.bukkit.command.CommandSender;
 import org.jetbrains.annotations.NotNull;
 

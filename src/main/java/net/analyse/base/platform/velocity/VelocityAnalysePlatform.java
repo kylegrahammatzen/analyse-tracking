@@ -9,6 +9,7 @@ import com.velocitypowered.api.plugin.annotation.DataDirectory;
 import com.velocitypowered.api.proxy.ProxyServer;
 import net.analyse.base.platform.AbstractPlatform;
 import net.analyse.base.sdk.AnalyseSDK;
+import net.analyse.base.utils.player.AnalysePlayer;
 import ninja.leaping.configurate.ConfigurationNode;
 import ninja.leaping.configurate.ConfigurationOptions;
 import ninja.leaping.configurate.objectmapping.serialize.TypeSerializerCollection;
@@ -16,9 +17,11 @@ import ninja.leaping.configurate.yaml.YAMLConfigurationLoader;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.List;
+import java.util.UUID;
 import java.util.logging.Logger;
 
-import static net.analyse.base.utils.ResourceUtils.getBundledFile;
+import static net.analyse.base.utils.resources.ResourceUtil.getBundledFile;
 
 public class VelocityAnalysePlatform extends AbstractPlatform {
 
@@ -98,5 +101,45 @@ public class VelocityAnalysePlatform extends AbstractPlatform {
      */
     PluginDescription getDescription() {
         return server.getPluginManager().getPlugin("analyse").map(PluginContainer::getDescription).orElse(null);
+    }
+
+    @Override
+    public List<UUID> getOnlinePlayers() {
+        return null;
+    }
+
+    @Override
+    public List<AnalysePlayer> getOnlineAnalysePlayers() {
+        return null;
+    }
+
+    @Override
+    public AnalysePlayer getPlayer(UUID uuid) {
+        return null;
+    }
+
+    @Override
+    public AnalysePlayer getPlayer(String name) {
+        return null;
+    }
+
+    @Override
+    public List<AnalysePlayer> getPlayersByCountry(String country) {
+        return null;
+    }
+
+    @Override
+    public List<AnalysePlayer> getPlayersByCountry(String country, int limit) {
+        return null;
+    }
+
+    @Override
+    public List<AnalysePlayer> getPlayersByDomain(String domain) {
+        return null;
+    }
+
+    @Override
+    public List<AnalysePlayer> getPlayersByDomain(String domain, int limit) {
+        return null;
     }
 }

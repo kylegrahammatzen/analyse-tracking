@@ -1,5 +1,7 @@
 package net.analyse.base.sdk;
 
+import net.analyse.base.sdk.exception.ServerNotFoundException;
+import net.analyse.base.sdk.response.GetPluginResponse;
 import net.analyse.base.sdk.response.GetServerResponse;
 import org.jetbrains.annotations.NotNull;
 
@@ -77,5 +79,17 @@ public class AnalyseSDK {
         }
 
         return generatedPassword;
+    }
+
+    public GetPluginResponse getPluginVersion() {
+        return new GetPluginResponse("Test", 0, "1.0.0", "1.0.0", "1.0.0");
+    }
+
+    /**
+     * @param playerCount The amount of players on the server.
+     * @throws ServerNotFoundException If the server is not found.
+     */
+    public void sendHeartbeat(int playerCount) throws ServerNotFoundException {
+        System.out.println("[SDK] Sending heartbeat with " + playerCount + " players.");
     }
 }

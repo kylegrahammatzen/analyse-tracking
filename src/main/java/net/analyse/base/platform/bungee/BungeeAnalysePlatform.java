@@ -3,6 +3,7 @@ package net.analyse.base.platform.bungee;
 import net.analyse.base.AnalyseBase;
 
 import net.analyse.base.sdk.AnalyseSDK;
+import net.analyse.base.utils.player.AnalysePlayer;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.plugin.Listener;
 import net.md_5.bungee.api.plugin.Plugin;
@@ -13,8 +14,10 @@ import ninja.leaping.configurate.yaml.YAMLConfigurationLoader;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
+import java.util.UUID;
 
-import static net.analyse.base.utils.ResourceUtils.getBundledFile;
+import static net.analyse.base.utils.resources.ResourceUtil.getBundledFile;
 
 public class BungeeAnalysePlatform extends Plugin implements AnalyseBase {
 
@@ -101,12 +104,49 @@ public class BungeeAnalysePlatform extends Plugin implements AnalyseBase {
 
     /**
      * Registers the specified listener with the plugin manager.
-     *
      * @param l the listener to register
-     * @return the registered listener
      */
-    public <T extends Listener> T registerEvents(T l) {
+    public <T extends Listener> void registerEvents(T l) {
         ProxyServer.getInstance().getPluginManager().registerListener(this, l);
-        return l;
+    }
+
+    @Override
+    public List<UUID> getOnlinePlayers() {
+        return null;
+    }
+
+    @Override
+    public List<AnalysePlayer> getOnlineAnalysePlayers() {
+        return null;
+    }
+
+    @Override
+    public AnalysePlayer getPlayer(UUID uuid) {
+        return null;
+    }
+
+    @Override
+    public AnalysePlayer getPlayer(String name) {
+        return null;
+    }
+
+    @Override
+    public List<AnalysePlayer> getPlayersByCountry(String country) {
+        return null;
+    }
+
+    @Override
+    public List<AnalysePlayer> getPlayersByCountry(String country, int limit) {
+        return null;
+    }
+
+    @Override
+    public List<AnalysePlayer> getPlayersByDomain(String domain) {
+        return null;
+    }
+
+    @Override
+    public List<AnalysePlayer> getPlayersByDomain(String domain, int limit) {
+        return null;
     }
 }

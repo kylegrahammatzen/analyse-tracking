@@ -1,4 +1,4 @@
-package net.analyse.base.utils;
+package net.analyse.base.utils.resources;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -7,7 +7,11 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.util.logging.Logger;
 
-public class ResourceUtils {
+public final class ResourceUtil {
+    private ResourceUtil() {
+        throw new UnsupportedOperationException("This is a utility class and cannot be instantiated");
+    }
+
     /**
      * Gets a file from the resources folder
      * @param logger The logger
@@ -28,7 +32,7 @@ public class ResourceUtils {
 
             try {
                 // Copies the file from the resources' folder to the plugin folder
-                Files.copy(ResourceUtils.getFile(platform, fileName).toPath(), file.toPath());
+                Files.copy(getFile(platform, fileName).toPath(), file.toPath());
             } catch (IOException e) {
                 logger.severe(String.format("Failed to copy %s to plugin folder", fileName));
             }
@@ -45,7 +49,7 @@ public class ResourceUtils {
     private static InputStream getFileFromResourceAsStream(String fileName) {
 
         // The class loader that loaded the class
-        ClassLoader classLoader = ResourceUtils.class.getClassLoader();
+        ClassLoader classLoader = ResourceUtil.class.getClassLoader();
         InputStream inputStream = classLoader.getResourceAsStream(fileName);
 
         // the stream holding the file content
@@ -64,7 +68,7 @@ public class ResourceUtils {
      * @throws IOException If the file could not be extracted.
      */
     private static File getFile(String platform, String fileName) throws IOException {
-        InputStream inputStream = ResourceUtils.getFileFromResourceAsStream(String.format("platform/%s/%s", platform, fileName));
+        InputStream inputStream = getFileFromResourceAsStream(String.format("platform/%s/%s", platform, fileName));
 
         // Retrieve file name and extension
         String[] split = fileName.split("\\.");

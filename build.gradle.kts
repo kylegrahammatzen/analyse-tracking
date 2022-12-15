@@ -40,6 +40,7 @@ dependencies {
 tasks {
     shadowJar {
         archiveFileName.set("${project.name}-${project.version}.jar")
+        minimize()
     }
     compileJava {
         options.encoding = "UTF-8"

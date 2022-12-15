@@ -2,69 +2,37 @@
 #      Analyse
 # Version - ${pluginVersion}
 #
-# Use https://docs.analyse.net for plugin documentation.
-
+# Refer to https://analyse.net/docs for plugin documentation
+# Server settings
 server:
   id: ''
   token: ''
 
+# Enable/disable hooks
 hooks:
   papi: true
 
+# Exclude players by their UUID
+# Example:
+# excluded:
+#   players:
+#   - 'ed6daf33-575b-460b-a2f3-e208a1004c10'
 excluded:
-  # Exclude players by their UUID.
   players: []
-  # Example:
-  # players:
-  #   - 'ed6daf33-575b-460b-a2f3-e208a1004c10'
 
+# Enable specific statistics
 enabled-stats:
   - 'kills'
   - 'deaths'
 
-# You can enable this (when testing) to get extra insights.
+# Enable debug mode (for testing)
 debug: false
 
-# The minimum duration (seconds) that a player must play for
-# in order to be counted. This is useful to prevent players logging
-# in and out (e.g. a hub) being treated as a player.
+# Minimum duration (in seconds) that a player must play to be counted
 minimum-session-duration: 30
 
-# Should we use the date the player first joined your server,
-# when adding them to Analyse? This is useful for tracking new joins
-# when first adding the plugin. However, if you reset your world yearly
-# I wouldn't advise enabling it.
+# Use the player's first join date as their join date in Analyse
 use-server-first-join-date: false
 
-# Configure the following to store player data locally before sending it to Analyse.
-#
-# Analyse stores player data locally before sending it to the web server.
-# If the database is not available, the data will be stored locally on SQLLite.
-#
-# BungeeCord:
-# - Set the 'proxy.bungee' option to true.
-#
-# Velocity:
-# - Set the 'proxy.velocity' option to true.
-#
-# If you are using a proxy, you should set the 'proxy' option to true based on the proxy you are using.
-#
-database:
-  proxy:
-    bungee: false
-    velocity: false
-  host: 'localhost'
-  port: '3306'
-  username: 'root'
-  password: 'password'
-
-#
-# *** DO NOT MODIFY OR SHARE THIS KEY ***
-#
-# The below key is automatically generated for your server.
-# It is used to encrypt sensitive information, such as player IP addresses
-# which can then ONLY be decrypted by this server.
-#
-# *** DO NOT MODIFY OR SHARE THIS KEY ***
-#
+# Encryption key for sensitive information (do not modify or share)
 encryption-key: ''

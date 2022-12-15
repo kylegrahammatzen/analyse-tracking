@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.logging.Logger;
 
-public interface AnalyseBase {
+public interface AnalyseBase extends AnalyseBaseAPI {
 
     /**
      * The system sdk

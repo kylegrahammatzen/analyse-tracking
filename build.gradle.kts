@@ -19,10 +19,6 @@ repositories {
 }
 
 dependencies {
-    // MySQL database dependencies & connection pool.
-    implementation("mysql:mysql-connector-java:8.0.30")
-    implementation("com.zaxxer:HikariCP:4.0.3")
-
     // Configuration file dependencies.
     implementation("ninja.leaping.configurate:configurate-yaml:3.7.1")
 

@@ -1,7 +1,7 @@
 package net.analyse.base.platform.bungee;
 
 import net.analyse.base.AnalyseBase;
-import net.analyse.base.database.AnalyseDatabase;
+
 import net.analyse.base.sdk.AnalyseSDK;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.plugin.Listener;
@@ -19,8 +19,6 @@ import static net.analyse.base.utils.ResourceUtils.getBundledFile;
 public class BungeeAnalysePlatform extends Plugin implements AnalyseBase {
 
     private AnalyseSDK sdk;
-    private AnalyseDatabase database;
-    private AnalyseDatabase backupDatabase;
 
     /**
      * Runs when the plugin is enabled

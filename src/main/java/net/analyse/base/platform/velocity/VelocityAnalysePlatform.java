@@ -7,7 +7,6 @@ import com.velocitypowered.api.plugin.PluginContainer;
 import com.velocitypowered.api.plugin.PluginDescription;
 import com.velocitypowered.api.plugin.annotation.DataDirectory;
 import com.velocitypowered.api.proxy.ProxyServer;
-import net.analyse.base.database.AnalyseDatabase;
 import net.analyse.base.platform.AbstractPlatform;
 import net.analyse.base.sdk.AnalyseSDK;
 import ninja.leaping.configurate.ConfigurationNode;
@@ -15,7 +14,6 @@ import ninja.leaping.configurate.ConfigurationOptions;
 import ninja.leaping.configurate.objectmapping.serialize.TypeSerializerCollection;
 import ninja.leaping.configurate.yaml.YAMLConfigurationLoader;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.logging.Logger;
@@ -26,8 +24,6 @@ public class VelocityAnalysePlatform extends AbstractPlatform {
 
     private final ProxyServer server;
     private AnalyseSDK sdk;
-    private AnalyseDatabase database;
-    private AnalyseDatabase backupDatabase;
 
     /**
      * Create a new VelocityAnalysePlatform

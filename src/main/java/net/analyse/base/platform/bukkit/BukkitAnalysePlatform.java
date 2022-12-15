@@ -1,7 +1,7 @@
 package net.analyse.base.platform.bukkit;
 
 import net.analyse.base.AnalyseBase;
-import net.analyse.base.database.AnalyseDatabase;
+
 import net.analyse.base.platform.bukkit.configuration.Configuration;
 import net.analyse.base.sdk.AnalyseSDK;
 import ninja.leaping.configurate.ConfigurationNode;
@@ -19,8 +19,6 @@ import static net.analyse.base.utils.ResourceUtils.getBundledFile;
 public class BukkitAnalysePlatform extends JavaPlugin implements AnalyseBase {
 
     private AnalyseSDK sdk;
-    private AnalyseDatabase database;
-    private AnalyseDatabase backupDatabase;
     private Configuration platformConfiguration;
 
     /**

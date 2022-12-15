@@ -6,6 +6,11 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public class ResourceUtils {
+    /**
+     * Extracts a resource from the jar file to the specified location.
+     * @param fileName The name of the file to extract.
+     * @return The file that was extracted.
+     */
     public static InputStream getFileFromResourceAsStream(String fileName) {
 
         // The class loader that loaded the class
@@ -20,6 +25,13 @@ public class ResourceUtils {
         }
     }
 
+    /**
+     * Extracts a resource from the jar file to the specified location.
+     * @param platform The platform to extract the resource for.
+     * @param fileName The name of the file to extract.
+     * @return The file that was extracted.
+     * @throws IOException If the file could not be extracted.
+     */
     public static File getFile(String platform, String fileName) throws IOException {
         InputStream inputStream = ResourceUtils.getFileFromResourceAsStream(String.format("platform/%s/%s", platform, fileName));
 

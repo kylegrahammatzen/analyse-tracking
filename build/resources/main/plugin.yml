@@ -1,5 +1,5 @@
 name: Analyse
-main: net.analyse.base.platform.bukkit.BukkitAnalysePlatform
+main: net.analyse.platform.bukkit.BukkitPlatform
 version: 1.0.0
 author: "Analyse"
 website: "https://analyse.net"
